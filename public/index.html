@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="my">
+  <head>
+    <meta charset="utf-8" />
+    <title>SafeMM — Scam Checker Myanmar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+          content="Check Myanmar phone numbers, payment accounts, links and pages for scam reports. Community-powered safety." />
+    <link rel="stylesheet" href="./styles.css" />
+    <!-- Firebase v9 modular via ESM -->
+    <script type="module" src="./firebase.js"></script>
+    <script type="module" src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="logo-wrap">
+        <div class="logo">🛡️</div>
+        <div>
+          <div class="title">SafeMM</div>
+          <div class="subtitle">Myanmar Scam Check & Community Alerts</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a href="#alerts" class="link">Alerts</a>
+        <a href="#learn" class="link">How to stay safe</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Quick Check -->
+      <section class="card">
+        <h2>🔍 Quick Check</h2>
+        <p class="muted">
+          ဖုန်းနံပါတ် / KBZPay / Wave / Bank Account / Facebook Page / Link ကို ထည့်ပြီး
+          <strong>လိမ်လည်မှုမှတ်တမ်းရှိ/မရှိ</strong> စစ်ကြည့်ပါ။ (Community data, not official verdict)
+        </p>
+        <form id="checkForm" class="check-form">
+          <select id="checkType">
+            <option value="auto">Auto detect</option>
+            <option value="phone">Phone / Viber / Telegram</option>
+            <option value="wallet">KBZPay / WavePay / Pay Account</option>
+            <option value="bank">Bank Account No.</option>
+            <option value="page">Facebook / Page / Username</option>
+            <option value="link">Website / URL</option>
+          </select>
+          <input id="checkValue"
+                 type="text"
+                 placeholder="e.g. 09xxxxxxx, https://..., @page-name"
+                 required />
+          <button type="submit">Check</button>
+        </form>
+        <div id="checkResult" class="result"></div>
+      </section>
+
+      <!-- Report -->
+      <section class="card">
+        <h2>📢 Report Scam (သတင်းပို့ရန်)</h2>
+        <p class="muted">
+          ကိုယ့်ကို လိမ်လည်ကြံရင် / လိမ်လည်ပြီးသား ဖြစ်ခဲ့ရင် ဒီနေရာလေးမှာ အ anon နဲ့ report လုပ်နိုင်ပါတယ်။
+          အခြားလူတွေ သတိထားလို့ရမယ်။
+        </p>
+        <form id="reportForm" class="report-form">
+          <div class="row">
+            <label>
+              Type
+              <select id="rType" required>
+                <option value="phone">Phone / Messenger / Viber</option>
+                <option value="wallet">KBZPay / WavePay</option>
+                <option value="bank">Bank Account</option>
+                <option value="page">Facebook / Telegram Page</option>
+                <option value="link">Website / URL</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label>
+              Value
+              <input id="rValue" type="text"
+                     placeholder="09..., @pagename, https://..."
+                     required />
+            </label>
+          </div>
+          <div class="row">
+            <label>
+              Category
+              <select id="rCategory" required>
+                <option value="loan">Fake Loan</option>
+                <option value="job">Fake Job Offer</option>
+                <option value="romance">Romance / Love Scam</option>
+                <option value="crypto">Crypto / Trading</option>
+                <option value="donation">Fake Donation</option>
+                <option value="kidnap">Kidnap / trafficking</option>
+                <option value="other">Other / Not Sure</option>
+              </select>
+            </label>
+            <label>
+              Region (optional)
+              <input id="rRegion" type="text" placeholder="Yangon, Mandalay, ..." />
+            </label>
+          </div>
+          <label>
+            What happened? (ဘာဖြစ်ခဲ့သလဲ)
+            <textarea id="rDesc" rows="3"
+              placeholder="ဘယ်လိုစာတွေ ပို့လာလဲ, ဘယ်လို ငွေတောင်းလဲ, ဘယ်လောက်နောက်ဆုံး လွှဲဖြစ်သလဲ (optional)"></textarea>
+          </label>
+          <label>
+            Loss amount (MMK, optional)
+            <input id="rAmount" type="number" min="0" />
+          </label>
+          <button type="submit">Submit Report</button>
+          <div id="reportMsg" class="muted small"></div>
+        </form>
+      </section>
+
+      <!-- Alerts -->
+      <section id="alerts" class="card">
+        <h2>🚨 Latest Alerts</h2>
+        <div id="alertsList" class="list"></div>
+      </section>
+
+      <!-- Learn -->
+      <section id="learn" class="card">
+        <h2>📚 How to stay safe (မြန်မာဘာသာ)</h2>
+        <ul class="bullets">
+          <li>“ကြိုတင်ငွေလွှဲ” တောင်းရင် အမြဲသံသယထားပါ။ ဘဏ်/အများသုံးလုပ်ငန်းတွေ မ Messenger ကနေလွှဲစေပါဘူး။</li>
+          <li>Facebook Page / Telegram Group အသစ်တွေက “မြန်မာ့ဘဏ်”၊ “Official” လို့ခေါ်ရင် URL ကိုစစ်ပါ။</li>
+          <li>“လက်ဆောင်ရမယ်၊ lottery လိုက်မလား” ဆိုပြီး link ပို့ရင် SafeMM ကနေ link check လုပ်ပါ။</li>
+          <li>ငွေလိမ်ခံရလျှင် local police, bank, telecom ကို ချက်ချင်း ဆက်သွယ်ပါ (app က guide ပေးနိုင်မယ်).</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      SafeMM — Community-powered scam awareness for Myanmar.
+      <a href="./admin.html">Admin / Moderator</a>
+    </footer>
+  </body>
+</html>
