@@ -1,6 +1,7 @@
 // public/app.js
 import {
   db,
+  auth,
   collection,
   doc,
   getDoc,
@@ -11,7 +12,10 @@ import {
   setDoc,
   orderBy,
   limit,
-  serverTimestamp
+  serverTimestamp,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
 } from "./firebase.js";
 
 const ENTITIES = collection(db, "entities");
@@ -192,25 +196,87 @@ async function loadAlerts() {
   }
 }
 
-// Wire up
+function setupAuthUI() {
+  const dlg = document.getElementById("authDialog");
+  const form = document.getElementById("authForm");
+  const btnLogin = document.getElementById("btnLogin");
+  const btnLogout = document.getElementById("btnLogout");
+  const btnCancel = document.getElementById("authCancel");
+  const errBox = document.getElementById("authError");
+
+  if (!btnLogin || !btnLogout || !dlg || !form) return;
+
+  btnLogin.addEventListener("click", () => {
+    errBox.textContent = "";
+    if (typeof dlg.showModal === "function") dlg.showModal();
+  });
+
+  btnLogout.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+    } catch (e) {
+      console.error(e);
+    }
+  });
+
+  if (btnCancel) {
+    btnCancel.addEventListener("click", () => {
+      dlg.close();
+    });
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errBox.textContent = "";
+    const email = document.getElementById("authEmail").value.trim();
+    const pw = document.getElementById("authPassword").value;
+    if (!email || !pw) {
+      errBox.textContent = "Email / password required.";
+      return;
+    }
+    try {
+      await signInWithEmailAndPassword(auth, email, pw);
+      dlg.close();
+    } catch (err) {
+      console.error(err);
+      errBox.textContent = "Login failed. Check credentials.";
+    }
+  });
+
+  // auth state
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      btnLogin.classList.add("hidden");
+      btnLogout.classList.remove("hidden");
+    } else {
+      btnLogin.classList.remove("hidden");
+      btnLogout.classList.add("hidden");
+    }
+  });
+}
+
+/* -------- BOOTSTRAP ---------- */
 window.addEventListener("DOMContentLoaded", () => {
+  // wire check form
   const checkForm = document.getElementById("checkForm");
   if (checkForm) {
     checkForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const type = document.getElementById("checkType").value;
       const value = document.getElementById("checkValue").value;
-      checkEntity(type, value).catch(err => {
+      checkEntity(type, value).catch((err) => {
         console.error(err);
-        document.getElementById("checkResult").textContent = "Error checking. Try again.";
+        document.getElementById("checkResult").textContent =
+          "Error checking. Try again.";
       });
     });
   }
 
+  // wire report
   const reportForm = document.getElementById("reportForm");
   if (reportForm) {
     reportForm.addEventListener("submit", (e) => {
-      submitReport(e).catch(err => {
+      submitReport(e).catch((err) => {
         console.error(err);
         document.getElementById("reportMsg").textContent =
           "❌ Failed to submit. Please try again.";
@@ -218,5 +284,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  setupAuthUI();
   loadAlerts();
 });

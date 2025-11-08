@@ -1,5 +1,6 @@
 import {
   db,
+  auth,
   collection,
   doc,
   getDocs,
@@ -7,7 +8,8 @@ import {
   query,
   where,
   updateDoc,
-  limit
+  limit,
+  onAuthStateChanged
 } from "./firebase.js";
 
 // Very simple protection: restrict by email domain/IP via rules in real app.
@@ -15,10 +17,20 @@ import {
 const REPORTS = collection(db, "reports");
 const ENTITIES = collection(db, "entities");
 
+const ADMIN_UIDS = [
+  "S47vddL1CIfWkc6X2U25jxJWlzJ3",
+  "S47vddL1CIfWkc6X2U25jxJWlzJ3",
+  // "REPLACE_WITH_ADMIN_UID_2"
+];
+
+function isAdminUser(user) {
+  return user && ADMIN_UIDS.includes(user.uid);
+}
+
 async function loadPending() {
   const tbody = document.querySelector("#pendingTable tbody");
   tbody.innerHTML = "<tr><td colspan='7'>Loading…</td></tr>";
-  const qRef = query(REPORTS, where("status", "==", "pending"), limit(50));
+  const qRef = query(REPORTS, where("status", "==", "pending"), limit(100));
   const snap = await getDocs(qRef);
   if (snap.empty) {
     tbody.innerHTML = "<tr><td colspan='7'>No pending reports.</td></tr>";
@@ -36,8 +48,8 @@ async function loadPending() {
       <td>${r.region || ""}</td>
       <td>${(r.description || "").slice(0,80)}</td>
       <td>
-        <button class="btn-xs btn-approve" data-approve="${s.id}">Approve</button>
-        <button class="btn-xs btn-reject" data-reject="${s.id}">Reject</button>
+        <button class="btn-xs btn-approve" data-id="${s.id}">Approve</button>
+        <button class="btn-xs btn-reject" data-id="${s.id}">Reject</button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -45,22 +57,42 @@ async function loadPending() {
 }
 
 async function handleAction(e) {
-  const approveId = e.target.getAttribute("data-approve");
-  const rejectId = e.target.getAttribute("data-reject");
-  if (!approveId && !rejectId) return;
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  const id = btn.getAttribute("data-id");
+  if (!id) return;
 
-  if (approveId) {
-    await updateDoc(doc(REPORTS, approveId), { status: "approved" });
-  } else if (rejectId) {
-    await updateDoc(doc(REPORTS, rejectId), { status: "rejected" });
+  if (btn.classList.contains("btn-approve")) {
+    await updateDoc(doc(REPORTS, id), { status: "approved" });
+  } else if (btn.classList.contains("btn-reject")) {
+    await updateDoc(doc(REPORTS, id), { status: "rejected" });
   }
   loadPending().catch(console.error);
 }
 
+function showDenied() {
+  const wrap = document.querySelector(".admin-wrap");
+  if (wrap) {
+    wrap.innerHTML = `
+      <h2>SafeMM Admin</h2>
+      <p class="muted small">Access denied. Please login with an admin account from main site.</p>
+    `;
+  }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("pendingTable").addEventListener("click", handleAction);
-  loadPending().catch(err => {
-    console.error(err);
-    document.getElementById("adminMsg").textContent = "Failed to load pending reports.";
+  const table = document.getElementById("pendingTable");
+  if (table) {
+    table.addEventListener("click", (e) => {
+      handleAction(e).catch(console.error);
+    });
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if (!isAdminUser(user)) {
+      showDenied();
+    } else {
+      loadPending().catch(console.error);
+    }
   });
 });
