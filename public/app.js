@@ -104,6 +104,59 @@ function calcRiskScore(current, reportType) {
   return base;
 }
 
+// ========== AUTO RELATED NUMBER CHECK + BADGE DISPLAY ==========
+
+async function checkPhoneEnhanced(phone) {
+  const root = phone.slice(0, phone.length - 2);
+  const q = query(collection(db, "reports"),
+    where("phone", ">=", root),
+    where("phone", "<", root + "99")
+  );
+  const snapshot = await getDocs(q);
+  const matches = snapshot.docs.map(d => d.data());
+
+  // classify badges
+  const verified = matches.filter(m => m.status === "verified");
+  const pending  = matches.filter(m => m.status === "pending");
+  const auto     = matches.filter(m => !m.status);
+
+  renderCheckResults(phone, { verified, pending, auto });
+}
+window.checkPhoneEnhanced = checkPhoneEnhanced;
+// render results with badges
+function renderCheckResults(phone, { verified, pending, auto }) {
+  const box = document.getElementById("results");
+  box.innerHTML = `<h3>Results for ${phone}</h3>`;
+
+  if (!verified.length && !pending.length && !auto.length) {
+    box.innerHTML += `<p class="empty">No reports found (yet).</p>`;
+    return;
+  }
+
+  const makeBadge = (t) => ({
+    verified: `<span class="badge green">✅ Verified</span>`,
+    pending: `<span class="badge yellow">⏳ Pending</span>`,
+    auto: `<span class="badge red">⚠ Auto-detected</span>`
+  }[t]);
+
+  const group = [...verified, ...pending, ...auto];
+  for (const r of group) {
+    const type = r.status || "auto";
+    const badge = makeBadge(type);
+    box.innerHTML += `
+      <div class="report-card">
+        <p><b>${r.phone}</b> ${badge}</p>
+        <p>${r.message || "(no description)"}</p>
+        ${r.bank ? `<p><b>Bank:</b> ${r.bank}</p>` : ""}
+        ${r.source ? `<p><b>Source:</b> ${r.source}</p>` : ""}
+      </div>`;
+  }
+
+  if (auto.length > 0) {
+    box.innerHTML += `<p class="auto-note">⚠ Possibly related auto-generated numbers detected.</p>`;
+  }
+}
+
 async function submitReport(ev) {
   ev.preventDefault();
   const msg = document.getElementById("reportMsg");

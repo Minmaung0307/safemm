@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <title>SafeMM Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="./styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
   <style>
     body { padding-top: 10px; }
     .admin-wrap { max-width: 1100px; margin: 0 auto; padding: 10px; }
@@ -15,16 +16,10 @@
     .btn-approve { background:#22c55e; color:#020817; }
     .btn-reject { background:#ef4444; color:#f9fafb; }
   </style>
-  <script type="module" src="./firebase.js"></script>
-  <script type="module" src="./admin.js" defer></script>
 </head>
 <body>
   <div class="admin-wrap">
     <h2>SafeMM — Admin / Moderator</h2>
-    <p class="muted small">
-      Approve or reject reports. Confirm entities as scams or safe.
-      (This demo relies on frontend-only auth whitelist.)
-    </p>
     <div id="adminMsg" class="muted small"></div>
     <h3>Pending Reports</h3>
     <table id="pendingTable">
@@ -42,5 +37,15 @@
       <tbody></tbody>
     </table>
   </div>
+  <p class="muted small link-group">
+      Manage reports and entities. Need help?
+      <div class="link-group">
+        <a href="./admin-help.html" target="_blank" class="link-btn alt">
+          <i class="ri-book-open-line"></i> Read Admin Guide
+        </a>
+      </div>
+    </p>
+    <script type="module" src="./firebase.js"></script>
+  <script type="module" src="./admin.js" defer></script>
 </body>
 </html>

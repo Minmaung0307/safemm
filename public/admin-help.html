@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SafeMM — Admin Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SafeMM admin & moderator guide — how to review scam reports, manage entities, and publish alerts safely."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .guide-wrap {
+        max-width: 960px;
+        margin: 0 auto 40px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .guide-card {
+        background: var(--card-bg, #0f172a);
+        border-radius: var(--radius, 18px);
+        padding: 16px 16px 14px;
+        border: 1px solid rgba(148, 163, 253, 0.08);
+        box-shadow: 0 18px 60px rgba(15, 23, 42, 0.55);
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 20px;
+      }
+      h2 {
+        margin: 14px 0 6px;
+        font-size: 16px;
+      }
+      h3 {
+        margin: 10px 0 4px;
+        font-size: 14px;
+      }
+      p {
+        margin: 4px 0;
+        font-size: 13px;
+        color: var(--muted, #9ca3af);
+      }
+      ul {
+        margin: 4px 0 6px 18px;
+        padding: 0;
+        font-size: 13px;
+        color: var(--muted, #9ca3af);
+      }
+      li { margin-bottom: 3px; }
+      .label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 10px;
+        border: 1px solid rgba(148,163,253,0.25);
+        color: var(--accent, #38bdf8);
+      }
+      .back-link {
+        font-size: 12px;
+        color: var(--accent, #38bdf8);
+        text-decoration: none;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+      code {
+        font-size: 11px;
+        padding: 2px 5px;
+        border-radius: 6px;
+        background: rgba(15,23,42,0.9);
+        border: 1px solid rgba(148,163,253,0.16);
+      }
+      .muted {
+        color: var(--muted, #9ca3af);
+      }
+      .section-tag {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--accent, #38bdf8);
+      }
+      .callout {
+        padding: 8px 10px;
+        border-radius: 10px;
+        background: rgba(15,23,42,0.95);
+        border: 1px solid rgba(56,189,248,0.18);
+        font-size: 11px;
+        color: var(--muted, #9ca3af);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="logo-wrap">
+        <div class="logo">🛡️</div>
+        <div>
+          <div class="title">SafeMM</div>
+          <div class="subtitle">Admin & Moderator Guide</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a href="./index.html" class="link">← Back to SafeMM</a>
+        <a href="./admin.html" class="link">Admin Panel</a>
+      </div>
+    </header>
+
+    <main class="guide-wrap">
+      <section class="guide-card">
+        <div class="section-tag">Overview</div>
+        <h1>SafeMM Admin / Moderator Guide</h1>
+        <p>
+          SafeMM ဟာ မြန်မာပြည်သူတွေကို online ငွေလိမ် (loan scam, job scam, romance scam,
+          fake donation, crypto, etc.) တွေဆီကနေ ကာကွယ်ဖို့ အတွက်
+          <strong>community-powered checking platform</strong> ဖြစ်ပါတယ်။
+        </p>
+        <p>
+          Admin/Moderator တွေဟာ public reports ကို စီမံ၊ စိစစ်၊ အသိပေး
+          <strong>တရားဝင်လောက်အောင် သဘောထားမှန်မှန်</strong> နဲ့ လုပ်ဆောင်ပေးရမယ်။
+        </p>
+      </section>
+
+      <section class="guide-card">
+        <h2>1. Login / Logout</h2>
+        <p>
+          <span class="label">For Admins Only</span>
+        </p>
+        <ul>
+          <li>Public users အတွက် Login မလိုပါဘူး။ Checking / Report အားလုံး free & open ဖြစ်တယ်။</li>
+          <li>
+            Admin / Moderator သာ
+            <code>Login</code> နဲ့ ဝင်ရမယ်။
+          </li>
+        </ul>
+        <h3>Login နည်း</h3>
+        <ul>
+          <li>SafeMM main page ကို ဖွင့် → အပေါ်ညာထောင့် <strong>Login</strong> ကိုနှိပ်ပါ။</li>
+          <li>သတ်မှတ်ထားတဲ့ Admin email / password ထည့်ပြီး Login လုပ်ပါ။</li>
+          <li>Login အောင်မြင်ရင် <strong>Logout</strong> button ပိုလာမယ် & Admin panel သို့ ဝင်လို့ရမယ်။</li>
+        </ul>
+        <h3>Logout နည်း</h3>
+        <ul>
+          <li>Topbar ရဲ့ <strong>Logout</strong> ကိုနှိပ်ရင် session ပျောက်သွားမယ်။</li>
+          <li>Logout အပြီး <code>admin.html</code> သွားရင် “Access denied” ပေါ်လာရမယ် (normal behavior).</li>
+        </ul>
+      </section>
+
+      <section class="guide-card">
+        <h2>2. Pending Reports စိစစ်ခြင်း</h2>
+        <p>
+          Admin panel: <code>/admin.html</code>
+        </p>
+        <ul>
+          <li>
+            Table ထဲမှာ <strong>status = pending</strong> ဖြစ်သေးတဲ့ reports တွေ အားလုံးကို မြင်ရမယ်။
+          </li>
+          <li>Column တွေ: Created, Type, Value, Category, Region, Desc, Actions</li>
+        </ul>
+
+        <h3>Approve (အတည်ပြု)</h3>
+        <ul>
+          <li>Report မှာ ရိုးရာ scam pattern, အတည်ပြုမနေရတဲ့ သက်သေများ ရှိလျှင် Approve လုပ်ပါ။</li>
+          <li>Approve လုပ်လိုက်သည့် report က နောက်ပိုင်း riskScore / reportCount တွေအတွက် ထည့်သွင်းဖော်ပြမယ်။</li>
+        </ul>
+
+        <h3>Reject (ပယ်ချ)</h3>
+        <ul>
+          <li>မရှင်းလင်းသော অভিযোগ, personal attack, လုံးဝမ make-sense လုပ်တာများကို Reject လုပ်ပါ။</li>
+          <li>ဒီနည်းနဲ့ innocent သူတွေကို မထိခိုက်စေရ၊ platform reputation ကာကွယ်နိုင်မယ်။</li>
+        </ul>
+
+        <div class="callout">
+          <strong>အကြံပြုချက်:</strong>
+          သက်သေရှာမလို့ရရင် သက်သေရှာ၊ screenshot / repeated pattern
+          များရှိရင်သာ strong “scam” အဖြစ် အသုံးချပါ။
+        </div>
+      </section>
+
+      <section class="guide-card">
+        <h2>3. Entities (Scam Records)</h2>
+        <p>
+          Entity = စစ်ဆေးမယ့် အရာရဲ့ main record (phone, wallet, bank, page, URL).
+        </p>
+        <ul>
+          <li>Reports တွေက အလိုအလျှောက် ကိုက်ညီတဲ့ entity ထဲသို့ စုစည်းသွားမယ်။</li>
+          <li>Each entity မှာ <code>reportCount</code>, <code>riskScore</code>, <code>lastReportAt</code> တို့ရှိမယ်။</li>
+          <li>Frontend Quick Check မှာ ဒီ data ကို သုံးပြီး badge ပြမယ် (No report / Some reports / High risk / etc.).</li>
+        </ul>
+        <p class="muted small">
+          နောက်တစ်ဆင့်: Admin panel မှာ “Mark as Confirmed Scam / Mark as Safe” button ထပ်ထည့်ပြီး
+          <code>confirmedScam</code>, <code>safeFlag</code> တွေကို UI ကနေ direct ထိန်းမယ်။
+        </p>
+      </section>
+
+      <section class="guide-card">
+        <h2>4. Alerts (🚨 Latest Alerts)</h2>
+        <p>
+          Alerts ဟာ “ယခုခေတ်အများမြင်ရသော scam pattern / hot case” တွေကို public ကို အရှင်းလင်းဆုံးနဲ့
+          အသိပေးဖော်ပြသည့်နေရာပါ။
+        </p>
+        <ul>
+          <li>Collection: <code>alerts</code></li>
+          <li>Fields: <code>title</code>, <code>body</code>, <code>severity: info|warning|critical</code>, <code>createdAt</code></li>
+          <li>Main page မှာ “Latest Alerts” အောက် card လေးတွေနဲ့ auto ပြမယ်။</li>
+        </ul>
+        <div class="callout">
+          <strong>ထည့်သင့်တာ:</strong>
+          Fake KBZ loan, fake job in Thailand/Singapore, Romance + Crypto scheme,
+          အထူးလူနာ donation scam စတဲ့ patternများကို မြန်မာလိုရှင်းပြပေးပါ။
+        </div>
+      </section>
+
+      <section class="guide-card">
+        <h2>5. Admin Ethics & Safety</h2>
+        <ul>
+          <li>အများမြင်နိုင်သော စာများမှာ personal info များ (NRC, လိပ်စာ၊ မိဘနာမည်) မထည့်ပါနဲ့။</li>
+          <li>Company/Bank တစ်ခုလုံးကို “Confirmed scam” လို့ မထုတ်ပြန်ပါနဲ့ — specific account / link ကိုသာ သတ်မှတ်ပါ။</li>
+          <li>False report တွေကို reject လုပ်၊ repeated abuser တွေကို blacklist စဉ်းစားနိုင်သည်။</li>
+          <li>SafeMM ဟာ “legal judgment” မဟုတ်ဘဲ “community warning system” ဖြစ်တယ်ဆိုတာ wording ထဲမှာ အမြဲသတိပြုပါ။</li>
+        </ul>
+      </section>
+
+      <section class="guide-card">
+        <h2>6. Quick Workflow Summary</h2>
+        <ul>
+          <li>Main site မှာ Admin account နဲ့ Login လုပ်</li>
+          <li><code>/admin.html</code> သို့သွားပြီး Pending reports တွေစိစစ်</li>
+          <li>အမှန်လောက်ထင်ရင် Approve, မဟုတ်ရင် Reject</li>
+          <li>Hot pattern တွေကို <code>alerts</code> ထဲ ထည့်ပြီး public အတွက် သတိပေး</li>
+          <li>လိုအပ်လာရင် Entities (confirmedScam / safeFlag) ကိုနောက်ထပ် UI နဲ့ ထိန်းမယ်</li>
+        </ul>
+      </section>
+
+      <section class="guide-card">
+        <a class="back-link" href="./admin.html">← Back to Admin Panel</a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      SafeMM Admin Guide — internal use for moderators & trusted team only.
+    </footer>
+  </body>
+</html>

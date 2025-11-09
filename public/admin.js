@@ -79,7 +79,7 @@ function showDenied() {
     `;
   }
 }
-
+window.checkPhoneEnhanced = checkPhoneEnhanced;
 window.addEventListener("DOMContentLoaded", () => {
   const table = document.getElementById("pendingTable");
   if (table) {

@@ -4,9 +4,15 @@
     <meta charset="utf-8" />
     <title>SafeMM — Scam Checker Myanmar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description"
-          content="Check Myanmar phone numbers, payment accounts, links and pages for scam reports. Community-powered safety." />
-    <link rel="stylesheet" href="./styles.css" />
+    <meta
+      name="description"
+      content="Check Myanmar phone numbers, payment accounts, links and pages for scam reports. Community-powered safety."
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <header class="topbar">
@@ -32,8 +38,10 @@
       <section class="card">
         <h2>🔍 Quick Check</h2>
         <p class="muted">
-          ဖုန်းနံပါတ် / KBZPay / Wave / Bank Account / Facebook Page / Link ကို ထည့်ပြီး
-          <strong>လိမ်လည်မှုမှတ်တမ်းရှိ/မရှိ</strong> စစ်ကြည့်ပါ။ (Community data, not official verdict)
+          ဖုန်းနံပါတ် / KBZPay / Wave / Bank Account / Facebook Page / Link ကို
+          ထည့်ပြီး
+          <strong>လိမ်လည်မှုမှတ်တမ်းရှိ/မရှိ</strong> စစ်ကြည့်ပါ။ (Community
+          data, not official verdict)
         </p>
         <form id="checkForm" class="check-form">
           <select id="checkType">
@@ -44,10 +52,12 @@
             <option value="page">Facebook / Page / Username</option>
             <option value="link">Website / URL</option>
           </select>
-          <input id="checkValue"
-                 type="text"
-                 placeholder="e.g. 09xxxxxxx, https://..., @page-name"
-                 required />
+          <input
+            id="checkValue"
+            type="text"
+            placeholder="e.g. 09xxxxxxx, https://..., @page-name"
+            required
+          />
           <button type="submit">Check</button>
         </form>
         <div id="checkResult" class="result"></div>
@@ -57,8 +67,8 @@
       <section class="card">
         <h2>📢 Report Scam (သတင်းပို့ရန်)</h2>
         <p class="muted">
-          ကိုယ့်ကို လိမ်လည်ကြံရင် / လိမ်လည်ပြီးသား ဖြစ်ခဲ့ရင် ဒီနေရာလေးမှာ အ anon နဲ့ report လုပ်နိုင်ပါတယ်။
-          အခြားလူတွေ သတိထားလို့ရမယ်။
+          ကိုယ့်ကို လိမ်လည်ကြံရင် / လိမ်လည်ပြီးသား ဖြစ်ခဲ့ရင် ဒီနေရာလေးမှာ အ
+          anon နဲ့ report လုပ်နိုင်ပါတယ်။ အခြားလူတွေ သတိထားလို့ရမယ်။
         </p>
         <form id="reportForm" class="report-form">
           <div class="row">
@@ -75,9 +85,12 @@
             </label>
             <label>
               Value
-              <input id="rValue" type="text"
-                     placeholder="09..., @pagename, https://..."
-                     required />
+              <input
+                id="rValue"
+                type="text"
+                placeholder="09..., @pagename, https://..."
+                required
+              />
             </label>
           </div>
           <div class="row">
@@ -95,13 +108,20 @@
             </label>
             <label>
               Region (optional)
-              <input id="rRegion" type="text" placeholder="Yangon, Mandalay, ..." />
+              <input
+                id="rRegion"
+                type="text"
+                placeholder="Yangon, Mandalay, ..."
+              />
             </label>
           </div>
           <label>
             What happened? (ဘာဖြစ်ခဲ့သလဲ)
-            <textarea id="rDesc" rows="3"
-              placeholder="ဘယ်လိုစာတွေ ပို့လာလဲ, ဘယ်လို ငွေတောင်းလဲ, ဘယ်လောက်နောက်ဆုံး လွှဲဖြစ်သလဲ (optional)"></textarea>
+            <textarea
+              id="rDesc"
+              rows="3"
+              placeholder="ဘယ်လိုစာတွေ ပို့လာလဲ, ဘယ်လို ငွေတောင်းလဲ, ဘယ်လောက်နောက်ဆုံး လွှဲဖြစ်သလဲ (optional)"
+            ></textarea>
           </label>
           <label>
             Loss amount (MMK, optional)
@@ -122,20 +142,32 @@
       <section id="learn" class="card">
         <h2>📚 How to stay safe (မြန်မာဘာသာ)</h2>
         <ul class="bullets">
-          <li>“ကြိုတင်ငွေလွှဲ” တောင်းရင် အမြဲသံသယထားပါ။ ဘဏ်/အများသုံးလုပ်ငန်းတွေ မ Messenger ကနေလွှဲစေပါဘူး။</li>
-          <li>Facebook Page / Telegram Group အသစ်တွေက “မြန်မာ့ဘဏ်”၊ “Official” လို့ခေါ်ရင် URL ကိုစစ်ပါ။</li>
-          <li>“လက်ဆောင်ရမယ်၊ lottery လိုက်မလား” ဆိုပြီး link ပို့ရင် SafeMM ကနေ link check လုပ်ပါ။</li>
-          <li>ငွေလိမ်ခံရလျှင် local police, bank, telecom ကို ချက်ချင်း ဆက်သွယ်ပါ (app က guide ပေးနိုင်မယ်).</li>
+          <li>
+            “ကြိုတင်ငွေလွှဲ” တောင်းရင် အမြဲသံသယထားပါ။ ဘဏ်/အများသုံးလုပ်ငန်းတွေ မ
+            Messenger ကနေလွှဲစေပါဘူး။
+          </li>
+          <li>
+            Facebook Page / Telegram Group အသစ်တွေက “မြန်မာ့ဘဏ်”၊ “Official”
+            လို့ခေါ်ရင် URL ကိုစစ်ပါ။
+          </li>
+          <li>
+            “လက်ဆောင်ရမယ်၊ lottery လိုက်မလား” ဆိုပြီး link ပို့ရင် SafeMM ကနေ
+            link check လုပ်ပါ။
+          </li>
+          <li>
+            ငွေလိမ်ခံရလျှင် local police, bank, telecom ကို ချက်ချင်း ဆက်သွယ်ပါ
+            (app က guide ပေးနိုင်မယ်).
+          </li>
         </ul>
       </section>
     </main>
 
-        <dialog id="authDialog" class="auth-dialog">
+    <dialog id="authDialog" class="auth-dialog">
       <form id="authForm" method="dialog" class="auth-card">
         <h3>Moderator / Admin Login</h3>
         <p class="muted small">
-          Public users don’t need an account to use SafeMM.
-          Login is only for trusted moderators/admins.
+          Public users don’t need an account to use SafeMM. Login is only for
+          trusted moderators/admins.
         </p>
         <label>
           Email
@@ -155,10 +187,17 @@
 
     <footer class="footer">
       SafeMM — Community-powered scam awareness for Myanmar.
-      <a href="./admin.html">Admin / Moderator</a>
+      <div class="link-group">
+        <a href="./admin.html" class="link-btn">
+          <i class="ri-shield-user-line"></i> Admin / Moderator
+        </a>
+        <a href="./admin-help.html" target="_blank" class="link-btn">
+          <i class="ri-question-answer-line"></i> Admin Guide
+        </a>
+      </div>
     </footer>
 
-        <!-- Firebase v9 modular via ESM -->
+    <!-- Firebase v9 modular via ESM -->
     <script type="module" src="./firebase.js"></script>
     <script type="module" src="./app.js" defer></script>
   </body>
