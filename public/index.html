@@ -99,9 +99,20 @@
               <select id="rCategory" required>
                 <option value="loan">Fake Loan</option>
                 <option value="job">Fake Job Offer</option>
+                <option value="delivery">Fake Delivery / Customs Fee</option>
+                <option value="officer">Fake Tax / Gov Officer</option>
+                <option value="seller">Fake Purchase / Seller Scam</option>
+                <option value="payment">Advance Payment Scam</option>
+                <option value="wcar">W Car / Fake Transport</option>
+                <option value="donation">Donation / Monk Scam</option>
+                <option value="reward">Lottery / Reward Scam</option>
+                <option value="app">Fake App / Link Scam</option>
+                <option value="opt">Phishing / OTP Request</option>
                 <option value="romance">Romance / Love Scam</option>
                 <option value="crypto">Crypto / Trading</option>
-                <option value="donation">Fake Donation</option>
+                <option value="helpdesk">Fake Support / Helpdesk</option>
+                <option value="rental">Fake Rental / Property</option>
+                <option value="buyer">Fake Online Seller / Buyer</option>
                 <option value="kidnap">Kidnap / trafficking</option>
                 <option value="other">Other / Not Sure</option>
               </select>
@@ -130,6 +141,14 @@
           <button type="submit">Submit Report</button>
           <div id="reportMsg" class="muted small"></div>
         </form>
+      </section>
+
+      <section class="section">
+        <h2>Confirmed Scam Directory</h2>
+        <p class="muted">
+          These entries were reported by users and reviewed by moderators.
+        </p>
+        <div id="confirmedList" class="scam-list"></div>
       </section>
 
       <!-- Alerts -->
@@ -196,7 +215,8 @@
         </a>
       </div>
     </footer>
-
+    <!-- libphonenumber-js (UMD bundle) -->
+    <script src="https://unpkg.com/libphonenumber-js@1.9.48/bundle/libphonenumber-js.min.js"></script>
     <!-- Firebase v9 modular via ESM -->
     <script type="module" src="./firebase.js"></script>
     <script type="module" src="./app.js" defer></script>
